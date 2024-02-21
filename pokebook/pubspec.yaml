@@ -37,6 +37,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   assorted_layout_widgets: ^8.0.5
   hive: ^2.2.3
+  faker: ^2.1.0
+  dropdown_search: ^5.0.6
+  flutter_typeahead: ^5.2.0
+  flutter_keyboard_visibility: ^6.0.0
 
 dev_dependencies:
   flutter_test:
@@ -62,7 +66,9 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - lib/assets/noise.png
+    - lib/assets/
+    - lib/assets/image-r.png
+    - lib/assets/imagej.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

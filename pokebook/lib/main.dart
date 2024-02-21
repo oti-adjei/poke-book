@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:pokebook/views/detailView.dart';
+import 'package:pokebook/views/homeView.dart';
+import 'package:pokebook/views/il.dart';
+import 'package:pokebook/views/testd.dart';
+
+import 'views/tert.dart';
+import 'views/testp.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +23,13 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyPage(),
+      //DetailView()
+      //const Overst(),
+      //const HomeView()
+      //MyCardr(),
+      // const SearchScreen()
+      //    const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
