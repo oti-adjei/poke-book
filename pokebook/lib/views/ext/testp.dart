@@ -1,5 +1,6 @@
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
+import 'package:pokebook/utils/listCard.dart';
 
 var faker = Faker();
 
@@ -36,46 +37,52 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: TextField(
-          style: const TextStyle(color: Colors.white),
-          onChanged: (value) {
-            search(value);
-          },
-          decoration: const InputDecoration(
-            hintText: 'Search...',
-            hintStyle: TextStyle(color: Colors.white),
-            fillColor: Colors.white,
-            prefixIcon: Icon(
-              Icons.search,
-              color: Colors.white,
+        title: Text("Hi"),
+      ),
+      body: Column(
+        children: [
+          TextField(
+            style: const TextStyle(color: Colors.white),
+            onChanged: (value) {
+              search(value);
+            },
+            decoration: const InputDecoration(
+              hintText: 'Search...',
+              hintStyle: TextStyle(color: Colors.white),
+              fillColor: Colors.white,
+              prefixIcon: Icon(
+                Icons.search,
+                color: Colors.white,
+              ),
             ),
           ),
-        ),
-      ),
-      body: filteredItems.isNotEmpty || _query.isNotEmpty
-          ? filteredItems.isEmpty
-              ? const Center(
-                  child: Text(
-                    'No Results Found',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                )
+          filteredItems.isNotEmpty || _query.isNotEmpty
+              ? filteredItems.isEmpty
+                  ? const Center(
+                      child: Text(
+                        'No Results Found',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    )
+                  : ListView.builder(
+                      itemCount: getCurrentPageItems().length,
+                      itemBuilder: (context, index) {
+                        return ListCard();
+                        // ListTile(
+                        //   title: Text(getCurrentPageItems()[index]),
+                        // );
+                      },
+                    )
               : ListView.builder(
-                  itemCount: getCurrentPageItems().length,
+                  itemCount: items.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                      title: Text(getCurrentPageItems()[index]),
+                      title: Text(items[index]),
                     );
                   },
-                )
-          : ListView.builder(
-              itemCount: items.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(items[index]),
-                );
-              },
-            ),
+                ),
+        ],
+      ),
       bottomNavigationBar: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

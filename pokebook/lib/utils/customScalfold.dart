@@ -10,11 +10,11 @@ class MyCustomScaffold extends StatelessWidget {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('../assets/noise.png'),
-            fit: BoxFit.cover, // Adjust as needed
-          ),
-        ),
+            // image: DecorationImage(
+            //   image: AssetImage('../assets/noise.png'),
+            //   fit: BoxFit.cover, // Adjust as needed
+            // ),
+            ),
         child: child,
       ),
     );

@@ -41,6 +41,8 @@ dependencies:
   dropdown_search: ^5.0.6
   flutter_typeahead: ^5.2.0
   flutter_keyboard_visibility: ^6.0.0
+  http: ^1.1.0
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:
