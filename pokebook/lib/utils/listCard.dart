@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ListCard extends StatelessWidget {
   ListCard(
       {super.key,
       required this.url,
       required this.name,
-      required this.type1,
-      required this.type2,
+      required this.types,
       required this.onTap});
 
   String url;
   String name;
-  String type1;
-  String type2;
+  final List<String> types;
   final VoidCallback onTap;
 
   @override
@@ -76,10 +75,17 @@ class ListCard extends StatelessWidget {
                   ),
                   // Image positioned to overflow the grey container
                   Positioned(
-                    left: 20,
+                    left: 0,
+                    right: 0,
                     height: 280,
-                    child: Image.network(url),
+                    child: Center(
+                      child: SvgPicture.network(
+                        url,
+                        // Adjust width as needed
+                      ),
+                    ),
                   ),
+
                   // Grey background container
                 ],
               ),
@@ -114,9 +120,10 @@ class ListCard extends StatelessWidget {
                   SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
+                    children: types.map((type) {
+                      return Container(
                         padding: EdgeInsets.all(8),
+                        margin: EdgeInsets.only(right: 10),
                         decoration: BoxDecoration(
                           color: Colors.grey[200],
                           borderRadius: BorderRadius.circular(20),
@@ -125,26 +132,11 @@ class ListCard extends StatelessWidget {
                           children: [
                             Icon(Icons.emoji_emotions),
                             SizedBox(width: 5),
-                            Text(type1 ?? "emoji1"),
+                            Text(type),
                           ],
                         ),
-                      ),
-                      SizedBox(width: 10),
-                      Container(
-                        padding: EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Row(
-                          children: [
-                            Icon(Icons.emoji_emotions),
-                            SizedBox(width: 5),
-                            Text(type2 ?? "Emoji 2"),
-                          ],
-                        ),
-                      ),
-                    ],
+                      );
+                    }).toList(),
                   ),
                 ],
               ),

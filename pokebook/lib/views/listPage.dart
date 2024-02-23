@@ -57,6 +57,24 @@ class _ListPageContentState extends State<_ListPageContent> {
     await pokemonProvider.refreshData();
   }
 
+  void search(String query) {
+    final pokemonProvider =
+        Provider.of<PokemonDataProvider>(context, listen: false);
+    setState(() {
+      _query = query;
+      if (query.isNotEmpty) {
+        // If search query is not empty, filter the allPokemon list
+        filteredItems = allPokemon!
+            .where((pokemon) =>
+                pokemon.name.toLowerCase().contains(query.toLowerCase()))
+            .toList();
+      } else {
+        // If search query is empty, assign allPokemon list to filteredItems
+        filteredItems = List.from(allPokemon!);
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -178,8 +196,7 @@ class _ListPageContentState extends State<_ListPageContent> {
                                 return ListCard(
                                   url: pokemon.artworkUrl ?? '',
                                   name: pokemon.name,
-                                  type1: "HI",
-                                  type2: "Suiii",
+                                  types: pokemon.types,
                                   onTap: () {
                                     Navigator.push(
                                         context,

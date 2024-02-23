@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class DetailView extends StatefulWidget {
   final String name;
@@ -61,11 +62,11 @@ class _DetailViewState extends State<DetailView>
               children: [
                 // Container C
                 Container(
-                  //color: Colors.blue,
-                  child: Center(
-                    child: Text('Container C'),
-                  ),
-                ),
+                    //color: Colors.blue,
+                    // child: Center(
+                    //   child: Text('Container C'),
+                    // ),
+                    ),
                 // Container D
 
                 Positioned(
@@ -93,21 +94,33 @@ class _DetailViewState extends State<DetailView>
                         tileMode: TileMode.clamp,
                       ),
                     ),
-                    child: Center(
-                      child: Text('Container D'),
-                    ),
+                    // child: Center(
+                    //   child: Text('Container D'),
+                    // ),
                   ),
                 ),
                 // Widget E (Image)
                 Positioned(
                   bottom: 0,
-                  left: 70,
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Image.network(widget.artworkUrl),
+                  left: 0,
+                  right: 0,
+                  height: 280,
+                  child: Center(
+                    child: SvgPicture.network(
+                      widget.artworkUrl,
+                      // Adjust width as needed
+                    ),
                   ),
                 ),
+                // Positioned(
+                //   bottom: 0,
+                //   left: 70,
+                //   width: MediaQuery.of(context).size.width * 0.7,
+                //   child: Align(
+                //     alignment: Alignment.center,
+                //     child: Image.network(widget.artworkUrl),
+                //   ),
+                // ),
                 Positioned(
                   left: 10,
                   top: 60,
@@ -164,9 +177,15 @@ class _DetailViewState extends State<DetailView>
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               _buildEmojiContainer(
-                                  Icons.emoji_emotions, 'Emoji 1'),
+                                  Icons.emoji_emotions,
+                                  widget.types.isNotEmpty
+                                      ? widget.types[0]
+                                      : ''),
                               _buildEmojiContainer(
-                                  Icons.emoji_emotions, 'Emoji 2'),
+                                  Icons.emoji_emotions,
+                                  widget.types.length > 1
+                                      ? widget.types[1]
+                                      : ''),
                             ],
                           ),
                         ),

@@ -10,7 +10,7 @@ class Pokemon {
   final int specialAttack;
   final int specialDefense;
   final int speed;
-  String? artworkUrl;
+  String artworkUrl;
 
   Pokemon({
     required this.name,
@@ -24,7 +24,7 @@ class Pokemon {
     required this.specialAttack,
     required this.specialDefense,
     required this.speed,
-    this.artworkUrl,
+    required this.artworkUrl,
   });
 
   Map<String, dynamic> toJson() {
@@ -56,18 +56,19 @@ class Pokemon {
     }
 
     return Pokemon(
-      name: json['name'] as String,
-      types: getTypes(json['types']),
-      height: json['height'] as int,
-      weight: json['weight'] as int,
-      abilities: getAbilities(json['abilities']),
-      hp: json['stats'][0]['base_stat'] as int,
-      attack: json['stats'][1]['base_stat'] as int,
-      defense: json['stats'][2]['base_stat'] as int,
-      specialAttack: json['stats'][3]['base_stat'] as int,
-      specialDefense: json['stats'][4]['base_stat'] as int,
-      speed: json['stats'][5]['base_stat'] as int,
-    );
+        name: json['name'] as String,
+        types: getTypes(json['types']),
+        height: json['height'] as int,
+        weight: json['weight'] as int,
+        abilities: getAbilities(json['abilities']),
+        hp: json['stats'][0]['base_stat'] as int,
+        attack: json['stats'][1]['base_stat'] as int,
+        defense: json['stats'][2]['base_stat'] as int,
+        specialAttack: json['stats'][3]['base_stat'] as int,
+        specialDefense: json['stats'][4]['base_stat'] as int,
+        speed: json['stats'][5]['base_stat'] as int,
+        artworkUrl:
+            json['sprites']['other']['dream_world']['front_default'] as String);
   }
   factory Pokemon.fromStoreJson(Map<String, dynamic> json) {
     return Pokemon(
@@ -84,8 +85,8 @@ class Pokemon {
         specialAttack: json['specialAttack'],
         specialDefense: json['specialDefense'],
         speed: json['speed'],
-        artworkUrl: json['artworkUrl']
-            ?.toString()); // Use optional type for flexibility
+        artworkUrl:
+            json['artworkUrl'].toString()); // Use optional type for flexibility
   }
 
 // Handle cases where artworkUrl is missing or invalid

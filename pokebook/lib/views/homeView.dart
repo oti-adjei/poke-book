@@ -54,7 +54,10 @@ class _HomeViewState extends State<HomeView> {
         ? MyCustomScaffold(
             child: Center(
                 child: Column(
-            children: [CircularProgressIndicator(), Text("Please wait ")],
+            children: [
+              Center(child: CircularProgressIndicator()),
+              Text("Please wait ")
+            ],
           )))
         : MyCustomScaffold(
             child: SingleChildScrollView(
@@ -110,7 +113,9 @@ class _HomeViewState extends State<HomeView> {
                           borderRadius: BorderRadius.circular(30),
                           border: Border.all(
                               width: 4,
-                              color: Colors.pink), // Thick pink border
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .primary), // Thick pink border
                         ),
                         child: Row(
                           children: [
@@ -135,9 +140,9 @@ class _HomeViewState extends State<HomeView> {
                               child: Container(
                                 width: 40,
                                 height: 40,
-                                decoration: const BoxDecoration(
+                                decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: Colors.pink,
+                                  color: Theme.of(context).colorScheme.primary,
                                 ),
                                 child: Icon(
                                   Icons.search,

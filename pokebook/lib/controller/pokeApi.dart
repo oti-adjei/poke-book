@@ -32,7 +32,7 @@ Future<List<Pokemon>> fetchPokemonDetails() async {
 //function to get the names and list from the first url api
 Future<List<Map<String, dynamic>>> fetchPokemonList() async {
   final response =
-      await http.get(Uri.parse('https://pokeapi.co/api/v2/pokemon/?limit=500'));
+      await http.get(Uri.parse('https://pokeapi.co/api/v2/pokemon/?limit=80'));
 
   if (response.statusCode == 200) {
     final Map<String, dynamic> data = json.decode(response.body);
@@ -68,15 +68,15 @@ Future<List<Pokemon>> fetchPokemonDetailsHelper(
       final Pokemon newPokemon = Pokemon.fromJson(data);
 
       // Fetch artwork concurrently
-      final artworkUrl =
-          'https://img.pokemondb.net/artwork/${newPokemon.name.toLowerCase()}.jpg';
-      final artworkResponse = await http.get(Uri.parse(artworkUrl));
-      if (artworkResponse.statusCode == 200) {
-        newPokemon.artworkUrl = artworkUrl;
-      } else {
-        // Handle error fetching artwork
-        print('Error fetching artwork for ${newPokemon.name}');
-      }
+      // final artworkUrl =
+      //     'https://img.pokemondb.net/artwork/${newPokemon.name.toLowerCase()}.jpg';
+      // final artworkResponse = await http.get(Uri.parse(artworkUrl));
+      // if (artworkResponse.statusCode == 200) {
+      //   newPokemon.artworkUrl = artworkUrl;
+      // } else {
+      //   // Handle error fetching artwork
+      //   print('Error fetching artwork for ${newPokemon.name}');
+      // }
 
       return newPokemon;
     } else {
