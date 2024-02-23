@@ -1,144 +1,156 @@
 import 'package:flutter/material.dart';
 
 class ListCard extends StatelessWidget {
-  const ListCard({super.key});
+  ListCard(
+      {super.key,
+      required this.url,
+      required this.name,
+      required this.type1,
+      required this.type2,
+      required this.onTap});
+
+  String url;
+  String name;
+  String type1;
+  String type2;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      //this will help see the full card
-      margin: EdgeInsets.all(16),
-      color: Colors.transparent,
-      // decoration: BoxDecoration(
-      //   borderRadius: BorderRadius.only(
-      //       bottomLeft: Radius.circular(10),
-      //       bottomRight: Radius.circular(10)),
-      //   color: Colors.blue,
-      // ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Container(
-            // this color should help explain
-            //color: Colors.blueAccent,
-            height: MediaQuery.of(context).size.height / 3,
-            child: Stack(
-              children: [
-                //Upper half container
-                Positioned(
-                    bottom: 0,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        //this will help see the full card
+        margin: EdgeInsets.all(16),
+        color: Colors.transparent,
+        // decoration: BoxDecoration(
+        //   borderRadius: BorderRadius.only(
+        //       bottomLeft: Radius.circular(10),
+        //       bottomRight: Radius.circular(10)),
+        //   color: Colors.blue,
+        // ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              // this color should help explain
+              //color: Colors.blueAccent,
+              height: MediaQuery.of(context).size.height / 3,
+              child: Stack(
+                children: [
+                  //Upper half container
+                  Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: Container(
+                        height: 250,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                topRight: Radius.circular(10)),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset:
+                                    Offset(0, 3), // changes position of shadow
+                              ),
+                            ]),
+                      )),
+                  //inside grey container
+                  Positioned(
                     left: 0,
+                    bottom: 10,
                     right: 0,
                     child: Container(
-                      height: 250,
+                      height: 218,
+                      margin: EdgeInsets.all(10), // Adjust height as needed
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              topRight: Radius.circular(10)),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                              offset:
-                                  Offset(0, 3), // changes position of shadow
-                            ),
-                          ]),
-                    )),
-                //inside grey container
-                Positioned(
-                  left: 0,
-                  bottom: 10,
-                  right: 0,
-                  child: Container(
-                    height: 218,
-                    margin: EdgeInsets.all(10), // Adjust height as needed
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.grey[300],
+                      ),
                     ),
                   ),
-                ),
-                // Image positioned to overflow the grey container
-                Positioned(
-                  left: 20,
-                  height: 280,
-                  child: Image.asset(
-                    'lib/assets/image-r.png',
-                    fit: BoxFit.cover,
+                  // Image positioned to overflow the grey container
+                  Positioned(
+                    left: 20,
+                    height: 280,
+                    child: Image.network(url),
                   ),
-                ),
-                // Grey background container
-              ],
+                  // Grey background container
+                ],
+              ),
             ),
-          ),
-          // Info side
-          Container(
-            padding: EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(10),
-                  bottomRight: Radius.circular(10)),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 1,
-                  blurRadius: 3,
-                  offset: Offset(0, 3), // changes position of shadow
-                ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'Title',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+            // Info side
+            Container(
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10)),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 1,
+                    blurRadius: 3,
+                    offset: Offset(0, 3), // changes position of shadow
                   ),
-                ),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(Icons.emoji_emotions),
-                          SizedBox(width: 5),
-                          Text('Emoji 1'),
-                        ],
-                      ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    name,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
-                    SizedBox(width: 10),
-                    Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(20),
+                  ),
+                  SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(Icons.emoji_emotions),
+                            SizedBox(width: 5),
+                            Text(type1 ?? "emoji1"),
+                          ],
+                        ),
                       ),
-                      child: Row(
-                        children: [
-                          Icon(Icons.emoji_emotions),
-                          SizedBox(width: 5),
-                          Text('Emoji 2'),
-                        ],
+                      SizedBox(width: 10),
+                      Container(
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(Icons.emoji_emotions),
+                            SizedBox(width: 5),
+                            Text(type2 ?? "Emoji 2"),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -1,6 +1,35 @@
 import 'package:flutter/material.dart';
 
 class DetailView extends StatefulWidget {
+  final String name;
+  final List<String> types;
+  final int height;
+  final int weight;
+  final List<String> abilities;
+  final int hp;
+  final int attack;
+  final int defense;
+  final int specialAttack;
+  final int specialDefense;
+  final int speed;
+  final String artworkUrl;
+
+  DetailView({
+    Key? key,
+    required this.name,
+    required this.types,
+    required this.height,
+    required this.weight,
+    required this.abilities,
+    required this.hp,
+    required this.attack,
+    required this.defense,
+    required this.specialAttack,
+    required this.specialDefense,
+    required this.speed,
+    required this.artworkUrl,
+  }) : super(key: key);
+
   @override
   State<DetailView> createState() => _DetailViewState();
 }
@@ -76,19 +105,22 @@ class _DetailViewState extends State<DetailView>
                   width: MediaQuery.of(context).size.width * 0.7,
                   child: Align(
                     alignment: Alignment.center,
-                    child: Image.asset('lib/assets/image-r.png'),
+                    child: Image.network(widget.artworkUrl),
                   ),
                 ),
                 Positioned(
                   left: 10,
                   top: 60,
-                  child: Container(
-                    padding: EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                      color: Colors.white,
+                  child: GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Container(
+                      padding: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        color: Colors.white,
+                      ),
+                      child: Icon(Icons.arrow_back),
                     ),
-                    child: Icon(Icons.arrow_back),
                   ),
                 ),
               ],
@@ -98,20 +130,22 @@ class _DetailViewState extends State<DetailView>
           Expanded(
             flex: 5,
             child: Container(
-              color: Colors.red,
+              //color: Colors.red,
               height: 100,
               child: Column(
                 children: [
                   // Container b
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 20),
-                    color: Colors.amber,
+                    // color: Colors.amber,
+                    decoration:
+                        BoxDecoration(border: Border.all(color: Colors.black)),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          'Container B Text',
-                          style: TextStyle(color: Colors.white, fontSize: 20),
+                          widget.name,
+                          style: TextStyle(color: Colors.black, fontSize: 20),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
@@ -138,70 +172,127 @@ class _DetailViewState extends State<DetailView>
                         //first tab bar widget
                         Column(
                           children: [
-                            Text('About', style: TextStyle(fontSize: 24)),
-                            _buildInfoRow('Height', '5\'7"'),
-                            _buildInfoRow('Weight', '150 lbs'),
-                            _buildInfoRow('Abilities', 'Strength, Agility'),
+                            Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child:
+                                  Text('About', style: TextStyle(fontSize: 24)),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: _buildInfoRow(
+                                  'Height', widget.height.toString()),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: _buildInfoRow(
+                                  'Weight', widget.weight.toString()),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: _buildInfoRow(
+                                  'Abilities', 'Strength, Agility'),
+                            ),
                           ],
                         ),
                         // second tab bar view widget
                         Column(
                           children: [
-                            Text('Stats', style: TextStyle(fontSize: 24)),
-                            _buildStatRow('HP', 100),
-                            _buildStatRow('Attack', 80),
-                            _buildStatRow('Defense', 70),
-                            _buildStatRow('Speed', 90),
-                            _buildStatRow('Special Attack', 85),
-                            _buildStatRow('Special Defense', 75),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child:
+                                  Text('Stats', style: TextStyle(fontSize: 24)),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: _buildStatRow('HP', widget.hp),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: _buildStatRow('Attack', widget.attack),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: _buildStatRow('Defense', widget.defense),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: _buildStatRow('Speed', widget.speed),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: _buildStatRow(
+                                  'Special Attack', widget.specialAttack),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: _buildStatRow(
+                                  'Special Defense', widget.specialDefense),
+                            ),
                           ],
                         ),
                         Column(
                           children: [
-                            Text('Similar', style: TextStyle(fontSize: 24)),
-                            ListTile(title: Text('Pokemon 1')),
-                            ListTile(title: Text('Pokemon 2')),
-                            ListTile(title: Text('Pokemon 3')),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Text('Similar',
+                                  style: TextStyle(fontSize: 24)),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: ListTile(title: Text('Pokemon 1')),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: ListTile(title: Text('Pokemon 2')),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: ListTile(title: Text('Pokemon 3')),
+                            ),
                           ],
                         ),
                       ],
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(5, 5, 5, 5),
-                    padding: const EdgeInsets.fromLTRB(2, 2, 2, 2),
-                    height: 35,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[300],
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                    child: TabBar(
-                      controller: _tabController,
-                      // give the indicator a decoration (color and border radius)
-                      indicator: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                          20.0,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 15.0, horizontal: 10),
+                    child: Container(
+                      margin: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+                      padding: const EdgeInsets.fromLTRB(2, 2, 2, 2),
+                      height: 35,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(10),
                         ),
-                        color: Colors.white60,
                       ),
-                      labelColor: Colors.black,
-                      unselectedLabelColor: Colors.black,
-                      tabs: const [
-                        // first tab [you can add an icon using the icon property]
-                        Tab(
-                          text: 'About',
+                      child: TabBar(
+                        controller: _tabController,
+                        // give the indicator a decoration (color and border radius)
+                        indicator: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            20.0,
+                          ),
+                          color: Colors.white60,
                         ),
+                        labelColor: Colors.black,
+                        unselectedLabelColor: Colors.black,
+                        tabs: const [
+                          // first tab [you can add an icon using the icon property]
+                          Tab(
+                            text: 'About',
+                          ),
 
-                        // second tab [you can add an icon using the icon property]
-                        Tab(
-                          text: 'Stats',
-                        ),
-                        Tab(
-                          text: 'Similar',
-                        ),
-                      ],
+                          // second tab [you can add an icon using the icon property]
+                          Tab(
+                            text: 'Stats',
+                          ),
+                          Tab(
+                            text: 'Similar',
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],

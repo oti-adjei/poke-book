@@ -67,10 +67,11 @@ class _SearchScreenState extends State<SearchScreen> {
                   : ListView.builder(
                       itemCount: getCurrentPageItems().length,
                       itemBuilder: (context, index) {
-                        return ListCard();
-                        // ListTile(
-                        //   title: Text(getCurrentPageItems()[index]),
-                        // );
+                        return
+                            //ListCard();
+                            ListTile(
+                          title: Text(getCurrentPageItems()[index]),
+                        );
                       },
                     )
               : ListView.builder(
