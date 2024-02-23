@@ -137,9 +137,18 @@ class _DetailViewState extends State<DetailView>
                   // Container b
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 20),
-                    // color: Colors.amber,
-                    decoration:
-                        BoxDecoration(border: Border.all(color: Colors.black)),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 2,
+                          blurRadius: 5,
+                          offset: Offset(0,
+                              2), // Change the y offset to control shadow position
+                        ),
+                      ],
+                    ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [

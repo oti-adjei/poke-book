@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:pokebook/utils/pokemonProvider.dart';
 import 'package:pokebook/views/ext/wee.dart';
 import 'package:pokebook/views/homeView.dart';
 import 'package:pokebook/views/listPage.dart';
+import 'package:provider/provider.dart';
 
 import 'theme/blue_theme.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+      create: (_) => PokemonDataProvider(), child: MyApp()));
 }
 
 class MyApp extends StatefulWidget {

@@ -2,31 +2,31 @@ import 'package:flutter/material.dart';
 
 class MyCircularButton extends StatelessWidget {
   final VoidCallback? onPressed;
+  Color? color;
 
-  const MyCircularButton({Key? key, this.onPressed}) : super(key: key);
+  MyCircularButton({Key? key, this.onPressed, this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        shape: CircleBorder(),
-        padding: EdgeInsets.all(20),
-      ),
-      child: Container(
-        width: 60,
-        height: 60,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(color: Theme.of(context).primaryColor),
-        ),
+    return Padding(
+      padding: const EdgeInsets.only(right: 10.0),
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.white,
+            shape: CircleBorder(),
+            padding: EdgeInsets.zero,
+            minimumSize: Size(40, 40) // Remove padding
+            ),
         child: Center(
           child: Container(
-            width: 40,
-            height: 40,
+            width:
+                30, // Adjust the size to make it slightly smaller than the outer circle
+            height: 30,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Theme.of(context).primaryColor,
+              color:
+                  color ?? Theme.of(context).primaryColor, // Use primary color
             ),
           ),
         ),

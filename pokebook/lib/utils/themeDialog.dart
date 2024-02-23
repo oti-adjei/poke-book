@@ -1,42 +1,47 @@
 import 'package:flutter/material.dart';
 
+import '../theme/amber_theme.dart';
+import '../theme/blue_theme.dart';
+import '../theme/red_theme.dart';
 import 'themeCircle.dart';
 
 class ThemeSelectionDialog extends StatelessWidget {
+  final Function(ThemeData) onThemeChanged;
+
+  const ThemeSelectionDialog({Key? key, required this.onThemeChanged})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Choose Theme'),
-      content: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(
-            width: 300,
-            child: MyCircularButton(
+      title: Center(child: Text('Choose Theme')),
+      content: Container(
+        height: MediaQuery.of(context).size.height * 0.1,
+        child: Row(
+          mainAxisAlignment:
+              MainAxisAlignment.spaceEvenly, // Adjust alignment as needed
+          children: [
+            MyCircularButton(
               onPressed: () {
-                // Change to theme 1
+                onThemeChanged(blueTheme);
+                Navigator.pop(context);
               },
             ),
-          ),
-          SizedBox(height: 10),
-          SizedBox(
-            width: double.infinity,
-            child: MyCircularButton(
+            MyCircularButton(
+              color: Colors.pink,
               onPressed: () {
-                // Change to theme 2
+                onThemeChanged(redTheme);
+                Navigator.pop(context);
               },
             ),
-          ),
-          SizedBox(height: 10),
-          SizedBox(
-            width: double.infinity,
-            child: MyCircularButton(
+            MyCircularButton(
+              color: Colors.amber,
               onPressed: () {
-                // Change to theme 3
+                onThemeChanged(amberTheme);
+                Navigator.pop(context);
               },
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

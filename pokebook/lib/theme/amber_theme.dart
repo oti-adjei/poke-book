@@ -7,11 +7,10 @@ import 'package:flutter/material.dart';
 //       end: Alignment.bottomCenter, // Define your gradient end alignment
 //     ), // Replace YourHexColor with the desired color code
 
-ThemeData redTheme = ThemeData(
+ThemeData amberTheme = ThemeData(
   brightness: Brightness.light,
   colorScheme: const ColorScheme.light(
-    background: Colors.white,
-    primary: Colors.pink,
-    tertiaryContainer: Color.fromARGB(255, 248, 52, 117),
-  ),
+      background: Colors.white,
+      primary: Colors.amber,
+      tertiaryContainer: Color.fromARGB(255, 229, 181, 35)),
 );

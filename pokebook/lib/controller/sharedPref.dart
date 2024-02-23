@@ -38,3 +38,8 @@ Future<void> storePokemonDetails(List<Pokemon> pokemonDetails) async {
     debugPrint('Failed to encode Pokémon details');
   }
 }
+
+Future<void> removePokemonDetails() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.remove('pokemon_details');
+}
